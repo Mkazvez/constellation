@@ -5,7 +5,10 @@ const db = require('../models')
 
 module.exports = session({
   secret: process.env.SECRET_KEY,
-  store: new SequelizeStore({ db: db.sequelize }),
+  store: new SequelizeStore({
+    db: db.sequelize,
+    disableTouch: true
+  }),
   saveUninitialized: false,
   resave: false
 })
