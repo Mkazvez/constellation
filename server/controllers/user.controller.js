@@ -23,6 +23,7 @@ module.exports.getAllUsers = async (req, res) => {
       'patronymicName',
       'lastName',
       'email',
+      'phone',
       'createdAt'
     ],
     order: ['id']
@@ -54,7 +55,9 @@ module.exports.updateUser = async (req, res) => {
       {
         firstName: req.body.firstName,
         patronymicName: req.body.patronymicName,
-        lastName: req.body.lastName
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone
       },
       { where: { id: req.params.id } }
     )

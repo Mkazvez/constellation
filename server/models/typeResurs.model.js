@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const TypeResurs = sequelize.define(
-    'TypeResurs',
+  const Typeresurs = sequelize.define(
+    'Typeresurs',
     {
       shottitle: DataTypes.STRING,
       title: DataTypes.STRING,
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   )
-  TypeResurs.associate = function(models) {
+  Typeresurs.associate = function(models) {
     // associations can be defined here
   }
-  return TypeResurs
+  return Typeresurs
 }

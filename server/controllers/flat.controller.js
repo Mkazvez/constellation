@@ -1,6 +1,6 @@
 const consola = require('consola')
 const { Flat } = require('../models')
-const { V_Flat } = require('../models')
+const { v_flat } = require('../models')
 
 module.exports.getFlats = async (req, res) => {
   const reqQuery = {
@@ -34,8 +34,8 @@ module.exports.getV_Flats = async (req, res) => {
     }
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const v_flats = await V_Flat.findAll(reqQuery)
-    res.json(v_flats)
+    const v_flats1 = await v_flat.findAll(reqQuery)
+    res.json(v_flats1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -45,8 +45,8 @@ module.exports.getV_Flats = async (req, res) => {
 
 module.exports.getFlat = async (req, res) => {
   try {
-    const flat = await Flat.findByPk(req.params.id)
-    res.json(flat)
+    const flat1 = await Flat.findByPk(req.params.id)
+    res.json(flat1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -56,8 +56,8 @@ module.exports.getFlat = async (req, res) => {
 module.exports.addFlat = async (req, res) => {
   try {
     const { idHouse, number, build, litera } = req.body
-    const flat = await Flat.create({ idHouse, number, build, litera })
-    res.status(201).json(flat)
+    const flat1 = await Flat.create({ idHouse, number, build, litera })
+    res.status(201).json(flat1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -67,11 +67,11 @@ module.exports.addFlat = async (req, res) => {
 module.exports.updateFlat = async (req, res) => {
   try {
     const { idHouse, number, build, litera } = req.body
-    const flat = await Flat.update(
+    const flat1 = await Flat.update(
       { idHouse, number, build, litera },
       { where: { id: req.params.id } }
     )
-    res.status(201).json(flat)
+    res.status(201).json(flat1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)

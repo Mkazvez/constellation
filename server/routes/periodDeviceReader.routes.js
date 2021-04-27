@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const controller = require('../controllers/perioddevicereader.controller')
+const controller = require('../controllers/periodDeviceReader.controller')
 const authAdmin = require('../middleware/authAdmin')
 const router = Router()
 

@@ -2,24 +2,23 @@
   <div>
     <h1>Квитанции</h1>
     <!--    <el-table :data="searchData(tableData)" stripe>-->
-    <el-table :data="tableData" stripe>
+    <el-table :data="document" stripe>
       <el-table-column
-        prop="date"
+        prop="period_month"
         label="Период"
         sortable
         width="130"
-        :formatter="formatDate"
       />
-      <el-table-column prop="address" label="Дом" sortable />
+      <el-table-column prop="nameFlat" label="Дом" sortable />
       <el-table-column
-        prop="flat"
-        label="Квартира"
+        prop="typedocument"
+        label="Квитанция"
         width="130"
         align="center"
         sortable
       />
       <el-table-column
-        prop="personalScore"
+        prop="idAccount"
         label="Лицевой счет"
         width="250"
         align="center"
@@ -36,7 +35,7 @@
             size="mini"
             type="primary"
             plain
-            @click="downloadReceipt(row.receipt)"
+            @click="downloadReceipt(row.url, row.idAccount, row.period)"
           >
             скачать
           </el-button>
@@ -48,60 +47,72 @@
 
 <script>
 import moment from 'moment'
+import consola from 'consola'
 
 export default {
   layout: 'personal',
+  async asyncData({ store, params, error, $axios }) {
+    try {
+      const iduserfilter = await store.state.auth.user.id
+      // eslint-disable-next-line no-console
+      console.log(
+        store.state.auth.user.id,
+        iduserfilter,
+        `/api/document/v/?idUser=${iduserfilter}`
+      )
+      const document = await $axios.$get(
+        `/api/document/v/?idUser=${iduserfilter}`
+      )
+      return { document }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+      error({ statusCode: 404, message: 'Ошибка сервера попробуйте позже' })
+    }
+  },
   data() {
     return {
-      search: '',
-      tableData: [
-        {
-          date: new Date(2020, 5, 23),
-          address: 'Победы ул. 44',
-          flat: 127,
-          personalScore: 520204307120,
-          receipt: 'receipts/1010540680.pdf'
-        },
-        {
-          date: new Date(2020, 4, 25),
-          address: 'Ленина ул. 22',
-          flat: 284,
-          personalScore: 126128248842,
-          receipt: '/file/366132899820.pdf'
-        },
-        {
-          date: new Date(2020, 3, 22),
-          address: 'Челюскинцев ул. 31',
-          flat: 24,
-          personalScore: 905167554080,
-          receipt: '/file/366132899820.pdf'
-        },
-        {
-          date: new Date(2020, 2, 20),
-          address: 'Гоголя ул. 19',
-          flat: 45,
-          personalScore: 954727585289,
-          receipt: '/file/366132899820.pdf'
-        },
-        {
-          date: new Date(2020, 1, 21),
-          address: 'Комсомольский пр-кт 57',
-          flat: 276,
-          personalScore: 264277930517,
-          receipt: '/file/366132899820.pdf'
-        }
-      ]
+      search: ''
     }
   },
   methods: {
     formatDate(row) {
       return moment(row.date).format('DD.MM.YYYY')
     },
-    downloadReceipt(receipt) {
+    async downloadReceipt(receipt, personalScore, date) {
+      try {
+        const d1 = date.toString().substring(0, 10)
+        const period1 = d1.substring(5, 7) + '_' + d1.substring(0, 4)
+        const fromFile1 =
+          'server/files/receipts/' +
+          period1 +
+          '/' +
+          receipt +
+          '/' +
+          personalScore +
+          '.pdf'
+        const toFile1 = 'static/receipts/' + personalScore + '.pdf'
+        // eslint-disable-next-line no-console
+        window.alert(fromFile1)
+        // window.alert(__dirname)
+        this.loading = true
+        await this.$axios.$post('/api/receipts/movedReceipt', {
+          fromFile: fromFile1,
+          toFile: toFile1
+        })
+        this.loading = false
+        await this.$router.push('/personal/receipts')
+      } catch (err) {
+        this.loading = false
+        this.$message.error('Произошла ошибка сервера, попробуйте еще раз!')
+        consola.error(err.message)
+      }
+      const toFile1 = 'receipts/' + personalScore + '.pdf'
+      // window.alert(toFile1)
       // const searchHost = window.location.host
       const link = document.createElement('a')
-      const urlPdf = receipt
-      window.alert(urlPdf)
+      const urlPdf = toFile1
+      // window.alert(urlPdf)
       link.href = `/${urlPdf}`
       document.body.appendChild(link)
       link.click()

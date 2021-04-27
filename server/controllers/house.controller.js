@@ -1,6 +1,6 @@
 const consola = require('consola')
 const { House } = require('../models')
-const { V_House } = require('../models')
+const { v_house } = require('../models')
 
 module.exports.getHouses = async (req, res) => {
   const reqQuery = {
@@ -42,8 +42,8 @@ module.exports.getV_Houses = async (req, res) => {
     }
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const v_houses = await V_House.findAll(reqQuery)
-    res.json(v_houses)
+    const v_houses1 = await v_house.findAll(reqQuery)
+    res.json(v_houses1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)

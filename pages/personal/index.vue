@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Личный Кабинет {{ user.firstName }}</h1>
+    <h1>
+      Личный Кабинет {{ user.firstName }} {{ user.patronymicName }}
+      {{ user.lastName }}
+    </h1>
   </div>
 </template>
 

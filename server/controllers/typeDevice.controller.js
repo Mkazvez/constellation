@@ -1,5 +1,5 @@
 const consola = require('consola')
-const { TypeDevice } = require('../models')
+const { Typedevice } = require('../models')
 
 module.exports.gettypeDevices = async (req, res) => {
   const reqQuery = {
@@ -9,8 +9,8 @@ module.exports.gettypeDevices = async (req, res) => {
   try {
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const typeDevice = await TypeDevice.findAll(reqQuery)
-    res.json(typeDevice)
+    const typeDevice1 = await Typedevice.findAll(reqQuery)
+    res.json(typeDevice1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -19,7 +19,7 @@ module.exports.gettypeDevices = async (req, res) => {
 
 module.exports.gettypeDevice = async (req, res) => {
   try {
-    const typeDevice = await TypeDevice.findByPk(req.params.id)
+    const typeDevice = await Typedevice.findByPk(req.params.id)
     res.json(typeDevice)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -30,7 +30,7 @@ module.exports.gettypeDevice = async (req, res) => {
 module.exports.addtypeDevice = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeDevice = await TypeDevice.create({ shottitle, title, description })
+    const typeDevice = await Typedevice.create({ shottitle, title, description })
     res.status(201).json(typeDevice)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -41,7 +41,7 @@ module.exports.addtypeDevice = async (req, res) => {
 module.exports.updatetypeDevice = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeDevice = await TypeDevice.update(
+    const typeDevice = await Typedevice.update(
       { shottitle, title, description },
       { where: { id: req.params.id } }
     )
@@ -55,7 +55,7 @@ module.exports.updatetypeDevice = async (req, res) => {
 module.exports.deletetypeDevice = async (req, res) => {
   consola.info(req)
   try {
-    await typeDevice.destroy({ where: { id: req.params.id } })
+    await typedevice.destroy({ where: { id: req.params.id } })
     res.status(201).json({ message: 'deleted' })
   } catch (err) {
     res.status(500).json({ error: err.message })

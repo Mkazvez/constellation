@@ -12,6 +12,9 @@
           <el-form-item label="Email" prop="email">
             <el-input v-model.trim="controls.email" />
           </el-form-item>
+          <el-form-item label="Телефон" prop="phone">
+            <el-input v-model.trim="controls.phone" />
+          </el-form-item>
           <el-form-item label="Пароль" prop="pass">
             <el-input v-model.trim="controls.pass" show-password />
           </el-form-item>
@@ -55,12 +58,16 @@ export default {
       controls: {
         email: '',
         pass: '',
-        checkPass: ''
+        checkPass: '',
+        phone: ''
       },
       rules: {
         email: [
           { required: true, message: 'Введите email', trigger: 'blur' },
           { type: 'email', message: 'Некорректный email', trigger: 'blur' }
+        ],
+        phone: [
+          { required: false, message: 'Введите телефон', trigger: 'blur' }
         ],
         pass: [
           { required: true, message: 'Введите пароль', trigger: 'blur' },
@@ -86,7 +93,8 @@ export default {
           try {
             const result = await this.$axios.$post('/api/auth/register', {
               email: this.controls.email,
-              password: this.controls.pass
+              password: this.controls.pass,
+              phone: this.controls.phone
             })
             this.fullScreenLoading = false
             if (result === 0) {

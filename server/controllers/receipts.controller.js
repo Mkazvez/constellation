@@ -1,23 +1,25 @@
 const fs = require('fs')
 const consola = require('consola')
-// const { Op } = require('sequelize')
-// const { User } = require('../models')
+const path = require('path')
 
 module.exports.movedReceipt = async (req, res) => {
-  // Copying the file to a the same name
-  console.error(__dirname)
-  fs.copyFile('/static/receipts/1010540680.pdf', '/static/1010540680_n.pdf', (err) => {
+  const { fromFile, toFile } = req.body
+  const fromFile2 = path.resolve(fromFile)
+  const toFile2 = path.resolve(toFile)
+  fs.copyFile(fromFile2, toFile2, (err) => {
     if (err) {
+      // eslint-disable-next-line no-console
+      console.log('Error Found:' + __dirname, err)
+      res.status(500).json({ error: err.message })
       consola.error(err)
     } else {
       // Get the current filenames
       // after the function
+      res.status(201).json(__dirname)
     }
   })
-
-  // Function to get current filenames
-  // in directory
 }
+
 // Node.js program to demonstrate the
 // fs.copyFile() method
 
