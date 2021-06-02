@@ -12,6 +12,9 @@
       <i class="el-icon-reading"></i>
       <span>Новости</span>
     </el-menu-item>
+    <el-menu-item index="/admin/useraccount"
+      >Пользователь - лицевые счета</el-menu-item
+    >
     <el-submenu index="2">
       <template slot="title"><i class="el-icon-setting" />Справочники</template>
       <el-menu-item index="/admin/typestreet">
@@ -29,9 +32,7 @@
       <el-menu-item index="/admin/devicemodel">Модели приборов</el-menu-item>
       <el-menu-item index="/admin/devicemark">Марка приборов</el-menu-item>
       <el-menu-item index="/admin/typedevice">Вид приборов</el-menu-item>
-      <el-menu-item index="/admin/useraccount"
-        >Пользователь - лицевые счета</el-menu-item
-      >
+      <el-menu-item index="/admin/device">Приборы</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

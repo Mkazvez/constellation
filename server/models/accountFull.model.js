@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const AccountFull = sequelize.define(
-    'AccountFull',
+    'accountFull',
     {
       idAccount: DataTypes.INTEGER,
       idFlat: DataTypes.INTEGER,

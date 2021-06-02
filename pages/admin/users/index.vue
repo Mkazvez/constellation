@@ -36,6 +36,11 @@
           <span>{{ row.patronymicName }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="Телефон">
+        <template slot-scope="{ row }">
+          <span>{{ row.phone }}</span>
+        </template>
+      </el-table-column>
       <el-table-column align="center">
         <!-- eslint-disable -->
         <template slot="header" slot-scope="scope">
@@ -43,6 +48,13 @@
           <el-input v-model="search" size="mini" placeholder="Поиск" />
         </template>
         <template slot-scope="{ row }">
+          <el-button
+            icon="el-icon-edit"
+            type="primary"
+            size="mini"
+            circle
+            @click="editUser(row.id)"
+          />
           <el-button
             icon="el-icon-delete"
             type="danger"
@@ -77,6 +89,9 @@ export default {
       } catch (err) {
         consola.error(err.message)
       }
+    },
+    async editUser(id) {
+      await this.$router.push(`/admin/users/${id}`)
     },
     async deleteUser(id) {
       try {

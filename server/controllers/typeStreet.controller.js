@@ -1,5 +1,5 @@
 const consola = require('consola')
-const { TypeStreet } = require('../models')
+const { typeStreet } = require('../models')
 
 module.exports.getTypeStreets = async (req, res) => {
   const reqQuery = {
@@ -9,8 +9,8 @@ module.exports.getTypeStreets = async (req, res) => {
   try {
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const typeStreet = await TypeStreet.findAll(reqQuery)
-    res.json(typeStreet)
+    const TypeStreet = await typeStreet.findAll(reqQuery)
+    res.json(TypeStreet)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -19,8 +19,8 @@ module.exports.getTypeStreets = async (req, res) => {
 
 module.exports.getTypeStreet = async (req, res) => {
   try {
-    const typeStreet = await TypeStreet.findByPk(req.params.id)
-    res.json(typeStreet)
+    const TypeStreet = await typeStreet.findByPk(req.params.id)
+    res.json(TypeStreet)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -30,12 +30,12 @@ module.exports.getTypeStreet = async (req, res) => {
 module.exports.addTypeStreet = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeStreet = await TypeStreet.create({
+    const TypeStreet = await typeStreet.create({
       shottitle,
       title,
       description
     })
-    res.status(201).json(typeStreet)
+    res.status(201).json(TypeStreet)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -45,11 +45,11 @@ module.exports.addTypeStreet = async (req, res) => {
 module.exports.updateTypeStreet = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeStreet = await TypeStreet.update(
+    const TypeStreet = await typeStreet.update(
       { shottitle, title, description },
       { where: { id: req.params.id } }
     )
-    res.status(201).json(typeStreet)
+    res.status(201).json(TypeStreet)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -59,7 +59,7 @@ module.exports.updateTypeStreet = async (req, res) => {
 module.exports.deleteTypeStreet = async (req, res) => {
   consola.info(req)
   try {
-    await TypeStreet.destroy({ where: { id: req.params.id } })
+    await typeStreet.destroy({ where: { id: req.params.id } })
     res.status(201).json({ message: 'deleted' })
   } catch (err) {
     res.status(500).json({ error: err.message })

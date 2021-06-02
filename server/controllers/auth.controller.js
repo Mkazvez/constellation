@@ -7,11 +7,11 @@ const sendEmail = require('../services/send-email')
 module.exports.registerUser = async (req, res) => {
   try {
     const uuidKey = uuid
-    const { email, password } = req.body
+    const { email, password, phone } = req.body
     const candidate = await User.findOne({ where: { email } })
     if (candidate) return res.status(400).json(0)
     const hashPassword = await bcrypt.hash(password, 12)
-    const user = await User.create({ email, password: hashPassword })
+    const user = await User.create({ email, password: hashPassword, phone })
     await CheckKey.create({ email, key: uuidKey })
     await sendEmail.checkEmail(email, uuidKey)
     res.status(201).json({ registration: user.email })

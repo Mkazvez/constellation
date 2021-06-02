@@ -66,11 +66,15 @@ export default {
   layout: 'personal',
   async asyncData({ store, params, error, $axios }) {
     try {
-      const iduserfilter = store.getters.auth.user.iduser
+      const iduserfilter = await store.state.auth.user.id
       // eslint-disable-next-line no-console
-      console.log(store.state.auth.getters.user)
+      console.log(
+        store.state.auth.user.id,
+        iduserfilter,
+        `/api/accounts/v/?idUser=${iduserfilter}`
+      )
       const useraccount = await $axios.$get(
-        '/api/accounts/v/?idUser=' + iduserfilter
+        `/api/accounts/v/?idUser=${iduserfilter}`
       )
       return { useraccount }
     } catch (e) {
@@ -100,10 +104,10 @@ export default {
     }
   },
   mounted() {
-    const iduserfilter = this.$store.state.auth.user.iduser
-    this.$axios
-      .$get('/api/accounts/v/?idUser=' + iduserfilter)
-      .then((response) => (this.useraccount = response))
+    // const iduserfilter = this.$store.state.auth.user.id
+    // this.$axios
+    //   .$get('/api/accounts/v/?idUser=' + iduserfilter)
+    //   .then((response) => (this.useraccount = response))
   },
 
   methods: {

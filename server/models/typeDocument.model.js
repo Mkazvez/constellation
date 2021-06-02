@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-  const TypeDocument = sequelize.define(
-    'TypeDocument',
+  const Typedocument = sequelize.define(
+    'Typedocument',
     {
       title: DataTypes.STRING,
       description: DataTypes.STRING
     },
     {}
   )
-  TypeDocument.associate = function(models) {
+  Typedocument.associate = function(models) {
     // associations can be defined here
   }
-  return TypeDocument
+  return Typedocument
 }

@@ -1,6 +1,6 @@
 const consola = require('consola')
 const { Street } = require('../models')
-const { V_street } = require('../models')
+//const { v_street } = require('../models')
 
 module.exports.getStreets = async (req, res) => {
   const reqQuery = {
@@ -18,21 +18,29 @@ module.exports.getStreets = async (req, res) => {
   }
 }
 
-module.exports.getV_Streets = async (req, res) => {
-  const reqQuery = {
-    attributes: ['id',  'title', 'shotTypeStreet', 'shotNameTypeStreet', 'NameTypeStreet', 'NameRegion', 'Description'],
-    order: ['id']
-  }
-  try {
-    const { value } = req.query
-    if (value) reqQuery.limit = +value
-    const v_street = await V_street.findAll(reqQuery)
-    res.json(v_street)
-  } catch (err) {
-    res.status(500).json({ error: err.message })
-    consola.error(err)
-  }
-}
+// module.exports.getV_Streets = async (req, res) => {
+//   const reqQuery = {
+//     attributes: [
+//       'id',
+//       'title',
+//       'shotTypeStreet',
+//       'shotNameTypeStreet',
+//       'NameTypeStreet',
+//       'NameRegion',
+//       'Description'
+//       ],
+//     order: ['id']
+//   }
+//   try {
+//     const { value } = req.query
+//     if (value) reqQuery.limit = +value
+//     const v_street1 = await v_street.findAll(reqQuery)
+//     res.json(v_street1)
+//   } catch (err) {
+//     res.status(500).json({ error: err.message })
+//     consola.error(err)
+//   }
+// }
 
 
 module.exports.getStreet = async (req, res) => {

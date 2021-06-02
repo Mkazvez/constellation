@@ -7,7 +7,11 @@
     @submit.native.prevent="onSubmit"
   >
     <el-form-item label="Дом" prop="idHouse">
-      <el-select v-model="controls.idHouse" placeholder="Выберите дом">
+      <el-select
+        v-model="controls.idHouse"
+        filterable
+        placeholder="Выберите дом"
+      >
         <el-option
           v-for="item in optionHouse"
           :key="item.value"

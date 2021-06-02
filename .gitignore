@@ -88,3 +88,7 @@ sw.*
 
 # Vim swap files
 *.swp
+# files receipts
+server/files/receipts
+storage/housingReceipt
+static/receipts

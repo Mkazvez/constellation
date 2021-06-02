@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const V_street = sequelize.define(
-    'V_street',
+    'v_street',
     {
       title: DataTypes.STRING,
       shotTypeStreet: DataTypes.STRING, 

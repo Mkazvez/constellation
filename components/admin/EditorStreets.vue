@@ -18,7 +18,11 @@
       />
     </el-form-item>
     <el-form-item label="Регион" prop="idregion">
-      <el-select v-model="controls.idregion" placeholder="Выберите регион">
+      <el-select
+        v-model="controls.idregion"
+        filterable
+        placeholder="Выберите регион"
+      >
         <el-option
           v-for="item in optionRegion"
           :key="item.value"

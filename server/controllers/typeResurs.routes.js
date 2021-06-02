@@ -1,5 +1,5 @@
 const consola = require('consola')
-const { TypeResurs } = require('../models')
+const { Typeresurs } = require('../models')
 
 module.exports.getTypeResurss = async (req, res) => {
   const reqQuery = {
@@ -9,8 +9,8 @@ module.exports.getTypeResurss = async (req, res) => {
   try {
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const typeResurs = await TypeResurs.findAll(reqQuery)
-    res.json(typeResurs)
+    const typeResurs1 = await Typeresurs.findAll(reqQuery)
+    res.json(typeResurs1)
   } catch (err) {
     res.status(500).json({ error: err.message })
     consola.error(err)
@@ -19,7 +19,7 @@ module.exports.getTypeResurss = async (req, res) => {
 
 module.exports.getTypeResurs = async (req, res) => {
   try {
-    const typeResurs = await TypeResurs.findByPk(req.params.id)
+    const typeResurs = await Typeresurs.findByPk(req.params.id)
     res.json(typeResurs)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -30,7 +30,7 @@ module.exports.getTypeResurs = async (req, res) => {
 module.exports.addTypeResurs = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeResurs = await TypeResurs.create({ shottitle, title, description })
+    const typeResurs = await Typeresurs.create({ shottitle, title, description })
     res.status(201).json(typeResurs)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -41,7 +41,7 @@ module.exports.addTypeResurs = async (req, res) => {
 module.exports.updateTypeResurs = async (req, res) => {
   try {
     const { shottitle, title, description } = req.body
-    const typeResurs = await TypeResurs.update(
+    const typeResurs = await Typeresurs.update(
       { shottitle, title, description },
       { where: { id: req.params.id } }
     )
@@ -55,7 +55,7 @@ module.exports.updateTypeResurs = async (req, res) => {
 module.exports.deleteTypeResurs = async (req, res) => {
   consola.info(req)
   try {
-    await TypeResurs.destroy({ where: { id: req.params.id } })
+    await Typeresurs.destroy({ where: { id: req.params.id } })
     res.status(201).json({ message: 'deleted' })
   } catch (err) {
     res.status(500).json({ error: err.message })

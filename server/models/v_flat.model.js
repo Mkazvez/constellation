@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const V_Flat = sequelize.define(
-    'V_Flat',
+    'v_flat',
     {
       nameHouse: DataTypes.STRING,
       idHouse: DataTypes.INTEGER,

@@ -10,7 +10,11 @@
       <el-input v-model="controls.title" />
     </el-form-item>
     <el-form-item label="Улица" prop="idStreet">
-      <el-select v-model="controls.idStreet" placeholder="Выберите улицу">
+      <el-select
+        v-model="controls.idStreet"
+        filterable
+        placeholder="Выберите улицу"
+      >
         <el-option
           v-for="item in optionStreet"
           :key="item.value"

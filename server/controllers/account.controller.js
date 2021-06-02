@@ -1,7 +1,7 @@
 const consola = require('consola')
 const { Op } = require('sequelize')
 const { Account } = require('../models')
-const { V_Accountuser } = require('../models')
+const { v_accountusers } = require('../models')
 
 module.exports.getAccounts = async (req, res) => {
   const reqQuery = {
@@ -51,7 +51,7 @@ module.exports.getv_accountusers = async (req, res) => {
     }
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const vaccountusers = await V_Accountuser.findAll(reqQuery)
+    const vaccountusers = await v_accountusers.findAll(reqQuery)
     res.json(vaccountusers)
   } catch (err) {
     res.status(500).json({ error: err.message })

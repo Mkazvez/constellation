@@ -6,8 +6,17 @@
     label-width="150px"
     @submit.native.prevent="onSubmit"
   >
-    <el-form-item label="Пользователь" prop="idUser">
-      <el-select v-model="controls.idUser" placeholder="Выберите пользователя">
+    <el-form-item
+      label="Пользователь"
+      prop="idUser"
+      label-width="150px"
+      width="300px"
+    >
+      <el-select
+        v-model="controls.idUser"
+        filterable
+        placeholder="Выберите пользователя"
+      >
         <el-option
           v-for="item in optionUsers"
           :key="item.value"
@@ -29,6 +38,7 @@
       <el-select
         v-model="controls.idAccount"
         placeholder="Выберите лицевой счет"
+        filterable
       >
         <el-option
           v-for="item in optionAccount"
@@ -167,4 +177,9 @@ button
 <style lang="sass">
 .el-form-item__content
   line-height: 25px
+</style>
+
+<style lang="sass">
+.el-select
+  width: 500px
 </style>

@@ -4,6 +4,7 @@ const authAdmin = require('../middleware/authAdmin')
 const router = Router()
 
 router.get('/', controller.getDocuments)
+router.get('/v/', controller.v_getDocuments)
 router.get('/:id', controller.getDocument)
 router.post('/', authAdmin, controller.addDocument)
 router.put('/:id', authAdmin, controller.updateDocument)
