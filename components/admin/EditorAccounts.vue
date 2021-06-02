@@ -7,7 +7,11 @@
     @submit.native.prevent="onSubmit"
   >
     <el-form-item label="Квартира" prop="idFlat">
-      <el-select v-model="controls.idFlat" placeholder="Выберите квартиру">
+      <el-select
+        v-model="controls.idFlat"
+        filterable
+        placeholder="Выберите квартиру"
+      >
         <el-option
           v-for="item in optionFlat"
           :key="item.value"
@@ -161,5 +165,11 @@ button
 
 <style lang="sass">
 .el-form-item__content
-  line-height: 25px
+  line-height: 50px
+  width: 300px
+</style>
+
+<style lang="sass">
+.el-select
+  width: 500px
 </style>

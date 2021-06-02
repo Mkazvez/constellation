@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ account.idAccount }}</h1>
+    <h1>Лицевой счет - пользователь</h1>
     <editor-useraccounts :account="account" />
   </div>
 </template>

@@ -38,7 +38,7 @@ module.exports.v_getDocuments = async (req, res) => {
       'period',
       'typedocument',
       'idAccount',
-      'idUser',
+      'iduser',
       'url',
       'nameFlat',
       'period_month'
@@ -50,9 +50,12 @@ module.exports.v_getDocuments = async (req, res) => {
     //   const { role } = req.session.user
     //   if (role === 'admin') delete reqQuery.where
     // }
+    console.log(req.query)
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const vdocuments = await v_document.findAll(reqQuery)
+    console.log(value)
+    // const vdocuments = await v_document.findAll(reqQuery)
+    const vdocuments = await v_document.findAll({ where: req.query })
     res.json(vdocuments)
   } catch (err) {
     res.status(500).json({ error: err.message })

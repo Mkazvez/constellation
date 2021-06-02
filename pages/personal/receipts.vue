@@ -61,7 +61,7 @@ export default {
         `/api/document/v/?idUser=${iduserfilter}`
       )
       const document = await $axios.$get(
-        `/api/document/v/?idUser=${iduserfilter}`
+        `/api/document/v/?iduser=${iduserfilter}`
       )
       return { document }
     } catch (e) {

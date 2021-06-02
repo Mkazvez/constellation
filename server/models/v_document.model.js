@@ -4,9 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       titledocument: DataTypes.STRING,
       period: DataTypes.DATE,
-      typedicument: DataTypes.STRING,
+      typedocument: DataTypes.STRING,
       idAccount: DataTypes.INTEGER,
-      idUser: DataTypes.INTEGER,
+      iduser: DataTypes.INTEGER,
       url: DataTypes.STRING,
       nameFlat: DataTypes.STRING,
       period_month: DataTypes.STRING

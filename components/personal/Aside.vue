@@ -8,7 +8,7 @@
       <i class="el-icon-document" />
       <span>Квитанции</span>
     </el-menu-item>
-    <el-menu-item index="/personal/receipts">
+    <el-menu-item index="/personal/deviceresult">
       <i class="el-icon-document" />
       <span>Показания ИПУ</span>
     </el-menu-item>

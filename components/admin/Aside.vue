@@ -32,6 +32,7 @@
       <el-menu-item index="/admin/devicemodel">Модели приборов</el-menu-item>
       <el-menu-item index="/admin/devicemark">Марка приборов</el-menu-item>
       <el-menu-item index="/admin/typedevice">Вид приборов</el-menu-item>
+      <el-menu-item index="/admin/device">Приборы</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

@@ -6,7 +6,12 @@
     label-width="150px"
     @submit.native.prevent="onSubmit"
   >
-    <el-form-item label="Пользователь" prop="idUser" label-width="150px">
+    <el-form-item
+      label="Пользователь"
+      prop="idUser"
+      label-width="150px"
+      width="300px"
+    >
       <el-select
         v-model="controls.idUser"
         filterable
@@ -172,4 +177,9 @@ button
 <style lang="sass">
 .el-form-item__content
   line-height: 25px
+</style>
+
+<style lang="sass">
+.el-select
+  width: 500px
 </style>
