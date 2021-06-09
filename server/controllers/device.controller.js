@@ -52,7 +52,9 @@ module.exports.getV_devices = async (req, res) => {
       'nameHouse',
       'numberFlat',
       'buildFlat',
-      'literaFlat'
+      'literaFlat',
+      'qtyresult',
+      'qtyfractional'
     ]
   }
   try {

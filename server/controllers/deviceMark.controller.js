@@ -3,7 +3,15 @@ const { DeviceMark } = require('../models')
 
 module.exports.getDeviceMarks = async (req, res) => {
   const reqQuery = {
-    attributes: ['id', 'shottitle' , 'title', 'description' ],
+    attributes: [
+      'id',
+      'shottitle',
+      'title',
+      'description',
+      'qtyresult',
+      'qtyfractional',
+      'qtymax'
+    ],
     order: [['createdAt', 'DESC']]
   }
   try {
@@ -33,8 +41,22 @@ module.exports.getDeviceMark = async (req, res) => {
 
 module.exports.addDeviceMark = async (req, res) => {
   try {
-    const { shottitle , title, description } = req.body
-    const devicemark = await DeviceMark.create({ shottitle , title, description })
+    const {
+      shottitle,
+      title,
+      description,
+      qtyresult,
+      qtyfractional,
+      qtymax
+    } = req.body
+    const devicemark = await DeviceMark.create({
+      shottitle,
+      title,
+      description,
+      qtyresult,
+      qtyfractional,
+      qtymax
+    })
     res.status(201).json(devicemark)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -44,9 +66,16 @@ module.exports.addDeviceMark = async (req, res) => {
 
 module.exports.updateDeviceMark = async (req, res) => {
   try {
-    const { shottitle , title, description } = req.body
+    const {
+      shottitle,
+      title,
+      description,
+      qtyresult,
+      qtyfractional,
+      qtymax
+    } = req.body
     const devicemark = await DeviceMark.update(
-      { shottitle , title, description },
+      { shottitle, title, description, qtyresult, qtyfractional, qtymax },
       { where: { id: req.params.id } }
     )
     res.status(201).json(devicemark)
@@ -65,4 +94,3 @@ module.exports.deleteDeviceMark = async (req, res) => {
     consola.error(err)
   }
 }
-

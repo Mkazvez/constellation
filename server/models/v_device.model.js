@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       nameHouse: DataTypes.STRING,
       numberFlat: DataTypes.INTEGER,
       buildFlat: DataTypes.STRING,
-      literaFlat: DataTypes.STRING
+      literaFlat: DataTypes.STRING,
+      qtyresult: DataTypes.INTEGER,
+      qtyfractional: DataTypes.INTEGER,
+      qtymax: DataTypes.INTEGER
     },
     {}
   )

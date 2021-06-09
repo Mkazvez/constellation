@@ -9,7 +9,12 @@
         deviceresult.filter(
           (data) =>
             !search ||
-            data.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            data.titleDeviceResult
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase()) ||
+            data.period_month
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase())
         )
       "
       size="medium"
@@ -54,6 +59,11 @@
           <span>{{ row.lresult }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="Прошлый результат 2" sortable width="100">
+        <template slot-scope="{ row }">
+          <span>{{ row.lresult2 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="Результат" sortable width="100">
         <template slot-scope="{ row }">
           <template
@@ -68,6 +78,32 @@
           <template v-else>
             <el-input
               v-model="row.result"
+              :disabled="false"
+              @change="changeresult(row)"
+            />
+          </template>
+        </template>
+      </el-table-column>
+      <el-table-column label="Результат2" sortable width="100">
+        <template slot-scope="{ row }">
+          <template
+            v-if="
+              !isDefaultPeriod2(
+                row.period,
+                defaultDateA[0].defaultDate,
+                row.qtyresult
+              )
+            "
+          >
+            <el-input
+              v-model="row.result2"
+              :disabled="true"
+              @change="changeresult(row)"
+            />
+          </template>
+          <template v-else>
+            <el-input
+              v-model="row.result2"
               :disabled="false"
               @change="changeresult(row)"
             />
@@ -135,6 +171,18 @@ export default {
       return (
         moment(periodP).format('DD.MM.YYYY') ===
         moment(defaultDatePeriod).format('DD.MM.YYYY')
+      )
+    },
+    isDefaultPeriod2(periodP, defaultDatePeriod, qtyresultp) {
+      // console.log(
+      //   moment(periodP).format('DD.MM.YYYY') ===
+      //     moment(defaultDatePeriod).format('DD.MM.YYYY'),
+      //   periodP,
+      //   defaultDatePeriod
+      // )
+      return (
+        moment(periodP).format('DD.MM.YYYY') ===
+          moment(defaultDatePeriod).format('DD.MM.YYYY') && qtyresultp > 1
       )
     },
     // async editDeviceResult(id) {

@@ -14,7 +14,7 @@
       "
       size="medium"
     >
-      <el-table-column label="Краткое наим-ие" width="80">
+      <el-table-column label="Краткое наим-ие" width="150">
         <template slot-scope="{ row }">
           <span>{{ row.shottitle }}</span>
         </template>
@@ -24,9 +24,24 @@
           <span>{{ row.title }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Комментарий">
+      <el-table-column label="Комментарий" width="150">
         <template slot-scope="{ row }">
           <span>{{ row.description }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Кол-во показаний" width="100">
+        <template slot-scope="{ row }">
+          <span>{{ row.qtyresult }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Максимальное значение" width="100">
+        <template slot-scope="{ row }">
+          <span>{{ row.qtymax }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Дробная часть" width="100">
+        <template slot-scope="{ row }">
+          <span>{{ row.qtyfractional }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" width="300">

@@ -12,6 +12,15 @@
     <el-form-item label="Наименование" prop="title">
       <el-input v-model="controls.title" />
     </el-form-item>
+    <el-form-item label="Кол-во показаний" prop="title">
+      <el-input v-model="controls.qtyresult" />
+    </el-form-item>
+    <el-form-item label="Максимальное значение" prop="title">
+      <el-input v-model="controls.qtymax" />
+    </el-form-item>
+    <el-form-item label="Дробная часть" prop="title">
+      <el-input v-model="controls.qtyfractional" />
+    </el-form-item>
     <el-form-item label="Краткое описание" prop="description">
       <el-input
         v-model="controls.description"
@@ -49,7 +58,10 @@ export default {
       controls: {
         shottitle: this.devicemark ? this.devicemark.shottitle : '',
         title: this.devicemark ? this.devicemark.title : '',
-        description: this.devicemark ? this.devicemark.description : ''
+        description: this.devicemark ? this.devicemark.description : '',
+        qtyresult: this.devicemark ? this.devicemark.qtyresult : '',
+        qtymax: this.devicemark ? this.devicemark.qtymax : '',
+        qtyfractional: this.devicemark ? this.devicemark.qtyfractional : ''
       },
       editorOption: {
         modules: {
@@ -73,6 +85,15 @@ export default {
         title: [{ required: true, message: 'Наименование', trigger: 'blur' }],
         description: [
           { required: true, message: 'Краткое описание', trigger: 'blur' }
+        ],
+        qtyresult: [
+          { required: true, message: 'Коли-во показаний', trigger: 'blur' }
+        ],
+        qtymax: [
+          { required: true, message: 'Максимальное значение', trigger: 'blur' }
+        ],
+        qtyfractional: [
+          { required: true, message: 'Дробная часть', trigger: 'blur' }
         ]
       }
     }
@@ -87,7 +108,10 @@ export default {
               await this.$axios.$post('/api/devicemark', {
                 shottitle: this.controls.shottitle,
                 title: this.controls.title,
-                description: this.controls.description
+                description: this.controls.description,
+                qtyresult: this.controls.qtyresult,
+                qtymax: this.controls.qtymax,
+                qtyfractional: this.controls.qtyfractional
               })
               this.loading = false
               await this.$router.push('/admin/devicemark')
@@ -104,7 +128,10 @@ export default {
               await this.$axios.$put(`/api/devicemark/${this.devicemark.id}`, {
                 shottitle: this.controls.shottitle,
                 title: this.controls.title,
-                description: this.controls.description
+                description: this.controls.description,
+                qtyresult: this.controls.qtyresult,
+                qtymax: this.controls.qtymax,
+                qtyfractional: this.controls.qtyfractional
               })
               this.loading = false
               await this.$router.push('/admin/devicemark')
