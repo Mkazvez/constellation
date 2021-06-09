@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       shottitle: DataTypes.STRING,
       title: DataTypes.STRING,
-      description: DataTypes.STRING
+      description: DataTypes.STRING,
+      qtyresult: DataTypes.INTEGER,
+      qtyfractional: DataTypes.INTEGER,
+      qtymax: DataTypes.INTEGER
     },
     {}
   )

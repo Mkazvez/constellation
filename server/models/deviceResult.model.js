@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       idDevice: DataTypes.INTEGER,
       period: DataTypes.DATE,
       result: DataTypes.FLOAT,
-      idUser: DataTypes.INTEGER
+      result2: DataTypes.FLOAT,
+      idUser: DataTypes.INTEGER,
+      qtyresult: DataTypes.INTEGER,
+      qtyfractional: DataTypes.INTEGER
+
     },
     {}
   )

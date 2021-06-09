@@ -11,6 +11,7 @@ module.exports.getDeviceResults = async (req, res) => {
       'idDevice',
       'period',
       'result',
+      'result2',
       'idUser'
     ],
     order: [['createdAt', 'DESC']]
@@ -38,8 +39,10 @@ module.exports.getV_deviceResults = async (req, res) => {
       'numberDevice',
       'period',
       'result',
+      'result2',
       'lperiod',
       'lresult',
+      'lresult2',
       'typeResursShotTitle',
       'typeDeviceShotTitle',
       'nameFlat',
@@ -47,7 +50,10 @@ module.exports.getV_deviceResults = async (req, res) => {
       'email',
       'period_month',
       'lperiod_month',
-      'idAccountUser'
+      'idAccountUser',
+      'qtyresult',
+      'qtyfractional',
+      'qtymax'
     ]
   }
   try {
@@ -77,13 +83,22 @@ module.exports.getDeviceResult = async (req, res) => {
 
 module.exports.addDeviceResult = async (req, res) => {
   try {
-    const { title, description, idDevice, period, result, idUser } = req.body
+    const {
+      title,
+      description,
+      idDevice,
+      period,
+      result,
+      result2,
+      idUser
+    } = req.body
     const deviceresult = await DeviceResult.create({
       title,
       description,
       idDevice,
       period,
       result,
+      result2,
       idUser
     })
     res.status(201).json(deviceresult)
@@ -95,7 +110,15 @@ module.exports.addDeviceResult = async (req, res) => {
 
 module.exports.updateDeviceResult = async (req, res) => {
   try {
-    const { title, description, idDevice, period, result, idUser } = req.body
+    const {
+      title,
+      description,
+      idDevice,
+      period,
+      result,
+      result2,
+      idUser
+    } = req.body
     const deviceresult = await DeviceResult.update(
       {
         title,
@@ -103,6 +126,7 @@ module.exports.updateDeviceResult = async (req, res) => {
         idDevice,
         period,
         result,
+        result2,
         idUser
       },
       { where: { id: req.params.id } }
@@ -116,10 +140,11 @@ module.exports.updateDeviceResult = async (req, res) => {
 
 module.exports.updateDeviceResultOnly = async (req, res) => {
   try {
-    const { result } = req.body
+    const { result, result2 } = req.body
     const deviceresult = await DeviceResult.update(
       {
-        result
+        result,
+        result2
       },
       { where: { id: req.params.id } }
     )
