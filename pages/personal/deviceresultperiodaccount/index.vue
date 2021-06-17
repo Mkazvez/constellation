@@ -3,7 +3,36 @@
     <h1>
       Показания приборов учета за период, активный период {{ defaultPeriod }}
     </h1>
+    <el-select
+      v-model="filtervalue"
+      placeholder="Период"
+      default-first-option
+      @change="changefilterselect()"
+    >
+      <el-option
+        v-for="item in yearmonths"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
+    <el-select
+      v-model="accountvalue"
+      placeholder="Выберите лицевой счет"
+      filterable
+      @change="changefilterselect()"
+    >
+      <el-option
+        v-for="item in optionAccount"
+        :key="item.value"
+        :label="item.idAccount + ' ' + item.nameFlat"
+        :value="item.id"
+      >
+      </el-option>
+    </el-select>
     <el-table
+      ref="filterTable"
       :data="
         deviceresult.filter(
           (data) =>
@@ -23,7 +52,12 @@
           <span>{{ row.titleDeviceResult }}</span>
         </template>
       </el-table-column> -->
-      <el-table-column label="Период" sortable width="100">
+      <el-table-column
+        label="Период"
+        width="100"
+        :filters="yearmonths"
+        :filter-method="filterTag"
+      >
         <template slot-scope="{ row }">
           <span>{{ row.period_month }}</span>
         </template>
@@ -43,11 +77,11 @@
           <span>{{ row.typeDeviceShotTitle }}</span>
         </template>
       </el-table-column> -->
-      <el-table-column label="Квартира" sortable width="300">
+      <!-- <el-table-column label="Квартира" sortable width="300">
         <template slot-scope="{ row }">
           <span>{{ row.nameFlat }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="Пр.пер." sortable width="120">
         <template slot-scope="{ row }">
           <span>{{ row.lperiod_month }}</span>
@@ -142,23 +176,66 @@ export default {
     const deviceresult = await $axios.$get(
       `/api/deviceResult/v/?idAccountUser=${iduserfilter}`
     )
+    // потом найти метод
+    const deviceresultfull = deviceresult
+    const optionAccount = await $axios.$get(
+      `/api/accounts/v/?idUser=${iduserfilter}`
+    )
     const defaultDateA1 = await $axios.$get('/api/statusPortals')
     const d1 = defaultDateA1[0].defaultDate.toString().substring(0, 10)
-    const defaultPeriod = d1.substring(5, 7) + '_' + d1.substring(0, 4)
+    const defaultPeriod = d1.substring(0, 4) + '-' + d1.substring(5, 7)
     const defaultDateA = defaultDateA1
-    return { deviceresult, defaultPeriod, defaultDateA }
+    return {
+      deviceresult,
+      defaultPeriod,
+      defaultDateA,
+      optionAccount,
+      deviceresultfull
+    }
   },
   data() {
     return {
-      search: ''
+      filtervalue: '',
+      accountvalue: '',
+      search: '',
+      yearmonths: [
+        {
+          value: '2021-04',
+          label: '2021-04',
+          text: '2021-04'
+        },
+        {
+          value: '2021-05',
+          label: '2021-05',
+          text: '2021-05'
+        },
+        {
+          value: '2021-06',
+          label: '2021-06',
+          text: '2021-06'
+        },
+        {
+          value: '2021-07',
+          label: '2021-07',
+          text: '2021-07'
+        },
+        {
+          value: '2021-08',
+          label: '2021-08',
+          text: '2021-08'
+        }
+      ],
+      optionAccount: null
     }
   },
-  // mounted() {
-  //   // let defaultDateA1
-  //   this.$axios
-  //     .$get('/api/statusPortals')
-  //     .then((response) => (this.defaultDateA = response))
-  // },
+  mounted() {
+    this.filtervalue = this.defaultPeriod
+    this.accountvalue = this.optionAccount[0].id
+    this.changefilterselect()
+    //   this.$axios
+    //     .$get('/api/accountFulls/v/?idUser=' + iduserfilter)
+    //     .then((response) => (this.optionAccount = response))
+  },
   methods: {
     isDefaultPeriod(periodP, defaultDatePeriod) {
       // console.log(
@@ -197,8 +274,42 @@ export default {
       } catch (err) {
         consola.error(err.message)
       }
+    },
+    changefilteraccount(accountvaluep, deviceresultp) {
+      const vidflat = this.optionAccount.filter(
+        (element) => element.id === accountvaluep
+      )
+      this.deviceresult = deviceresultp.filter(
+        // eslint-disable-next-line camelcase
+        (element) => element.idFlat === vidflat[0].idFlat
+      )
+      console.log(accountvaluep, deviceresultp, vidflat)
+    },
+    changefilterperiod(periodvaluep, deviceresultp) {
+      // this.deviceresult = deviceresultp.filter(
+      //   // eslint-disable-next-line camelcase
+      //   (element) => element.period_month === periodvaluep
+      // )
+      this.deviceresult = this.deviceresultfull.filter(
+        // eslint-disable-next-line camelcase
+        (element) => element.period_month === this.filtervalue
+      )
+      console.log(this)
+    },
+    changefilterselect() {
+      const vidflat = this.optionAccount.filter(
+        (element) => element.id === this.accountvalue
+      )
+      this.deviceresult = this.deviceresultfull.filter(
+        // eslint-disable-next-line camelcase
+        (element) =>
+          element.period_month === this.filtervalue &&
+          element.idFlat === vidflat[0].idFlat
+      )
+    },
+    filterTag(value, row) {
+      return row.period_month === value
     }
-
     // async addDeviceResult() {
     //   await this.$router.push('/admin/deviceResult/add')
     // },
@@ -236,4 +347,8 @@ h1
   position: absolute
   top: 15px
   right: 10px
+</style>
+<style lang="sass">
+.el-select
+  width: 500px
 </style>

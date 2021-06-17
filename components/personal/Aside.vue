@@ -5,19 +5,23 @@
       <span>Главная</span>
     </el-menu-item>
     <el-menu-item index="/personal/receipts">
-      <i class="el-icon-document" />
+      <i class="el-icon-s-order" />
       <span>Квитанции</span>
     </el-menu-item>
     <el-menu-item index="/personal/deviceresult">
-      <i class="el-icon-document" />
+      <i class="el-icon-odometer" />
       <span>Показания ИПУ</span>
     </el-menu-item>
+    <el-menu-item index="/personal/deviceresultperiodaccount">
+      <i class="el-icon-odometer" />
+      <span>Показания ИПУ 2</span>
+    </el-menu-item>
     <el-menu-item index="/personal/receipts">
-      <i class="el-icon-document" />
+      <i class="el-icon-document-copy" />
       <span>Обращения</span>
     </el-menu-item>
     <el-menu-item index="/personal/useraccount/">
-      <i class="el-icon-document" />
+      <i class="el-icon-tickets" />
       <span>Лицевый счета</span>
     </el-menu-item>
   </el-menu>

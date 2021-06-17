@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       idAccountFull: DataTypes.INTEGER,
       idAccount: DataTypes.INTEGER,
       nameFlat: DataTypes.STRING,
-      email: DataTypes.STRING
+      email: DataTypes.STRING,
+      idFlat: DataTypes.INTEGER
     },
     {}
   )

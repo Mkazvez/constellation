@@ -53,7 +53,8 @@ module.exports.getV_deviceResults = async (req, res) => {
       'idAccountUser',
       'qtyresult',
       'qtyfractional',
-      'qtymax'
+      'qtymax',
+      'idFlat'
     ]
   }
   try {
