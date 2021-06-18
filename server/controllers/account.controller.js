@@ -39,7 +39,8 @@ module.exports.getv_accountusers = async (req, res) => {
       'idAccount',
       'nameFlat',
       'email',
-      'confirm'
+      'confirm',
+      'idFlat'
     ],
     order: [['idUser']],
     where: condition
@@ -51,7 +52,7 @@ module.exports.getv_accountusers = async (req, res) => {
     }
     const { value } = req.query
     if (value) reqQuery.limit = +value
-    const vaccountusers = await v_accountusers.findAll(reqQuery)
+    const vaccountusers = await v_accountusers.findAll({ where: req.query })
     res.json(vaccountusers)
   } catch (err) {
     res.status(500).json({ error: err.message })
