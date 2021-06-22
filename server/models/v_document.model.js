@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       iduser: DataTypes.INTEGER,
       url: DataTypes.STRING,
       nameFlat: DataTypes.STRING,
-      period_month: DataTypes.STRING
+      period_month: DataTypes.STRING,
+      idFlat: DataTypes.INTEGER
     },
     {}
   )
