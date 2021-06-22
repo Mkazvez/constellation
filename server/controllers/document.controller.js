@@ -41,7 +41,8 @@ module.exports.v_getDocuments = async (req, res) => {
       'iduser',
       'url',
       'nameFlat',
-      'period_month'
+      'period_month',
+      'idFlat'
     ],
     order: [['period', 'DESC']]
   }

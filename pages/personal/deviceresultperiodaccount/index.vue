@@ -72,6 +72,11 @@
           <span>{{ row.typeResursShotTitle }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="Комментарий" sortable width="140">
+        <template slot-scope="{ row }">
+          <span>{{ row.deviceTitle }}</span>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="Тип прибора" width="120">
         <template slot-scope="{ row }">
           <span>{{ row.typeDeviceShotTitle }}</span>
@@ -117,6 +122,42 @@
           </template>
         </template>
       </el-table-column>
+      <!-- <el-table-column label="Показания" width="400">
+        <template slot-scope="{ row }">
+          <el-row :gutter="20">
+            <el-col :span="2" width="10">
+              <el-input v-model="row.result" maxlength="1" minlength="1">
+              </el-input>
+            </el-col>
+            <el-col :span="2">
+              <div class="grid-content bg-purple">
+                <el-input v-model="input2"> </el-input>
+              </div>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input3"> </el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input4"> </el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input5"> </el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input6"></el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input7"> </el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input8"></el-input>
+            </el-col>
+            <el-col :span="2">
+              <el-input v-model="input9"> </el-input>
+            </el-col>
+          </el-row>
+        </template>
+      </el-table-column> -->
       <el-table-column label="Показ.2" sortable width="100">
         <template slot-scope="{ row }">
           <template
@@ -128,11 +169,11 @@
               )
             "
           >
-            <el-input
+            <!-- <el-input
               v-model="row.result2"
               :disabled="true"
               @change="changeresult(row)"
-            />
+            /> -->
           </template>
           <template v-else>
             <el-input
@@ -198,6 +239,7 @@ export default {
       filtervalue: '',
       accountvalue: '',
       search: '',
+      input1: '',
       yearmonths: [
         {
           value: '2021-04',
@@ -351,4 +393,29 @@ h1
 <style lang="sass">
 .el-select
   width: 500px
+.el-row
+  margin-bottom: 20px;
+  &:last-child
+    margin-bottom: 0;
+
+.el-col
+  border-radius: 4px;
+
+.bg-purple-dark
+  background: #99a9bf;
+
+.bg-purple
+  background: #d3dce6;
+
+.bg-purple-light
+  background: #e5e9f2;
+
+.grid-content
+  border-radius: 4px;
+  min-height: 36px;
+
+
+.row-bg
+  padding: 10px 0;
+  background-color: #f9fafc;
 </style>

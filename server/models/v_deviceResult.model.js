@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       idAccountUser: DataTypes.INTEGER,
       qtyresult: DataTypes.INTEGER,
       qtyfractional: DataTypes.INTEGER,
-      qtymax: DataTypes.INTEGER
+      qtymax: DataTypes.INTEGER,
+      deviceTitle: DataTypes.STRING
     },
     {}
   )

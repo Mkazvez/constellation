@@ -54,7 +54,8 @@ module.exports.getV_deviceResults = async (req, res) => {
       'qtyresult',
       'qtyfractional',
       'qtymax',
-      'idFlat'
+      'idFlat',
+      'deviceTitle'
     ]
   }
   try {
